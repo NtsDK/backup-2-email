@@ -1,0 +1,8 @@
+{
+    "mail":"your mail here",
+    "password":"pass from your mail",
+    "smtpServer":"smtp server",
+    "backupName":"backup name - mail subject",
+    "folderPath":"path to folder",
+    "timeInterval": 10000
+}
