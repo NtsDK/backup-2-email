@@ -1,5 +1,6 @@
 {
-    "mail":"your mail here",
+    "fromMail":"from mail here",
+    "toMail":"to mail here",
     "password":"pass from your mail",
     "smtpServer":"smtp server",
     "backupName":"backup name - mail subject",
