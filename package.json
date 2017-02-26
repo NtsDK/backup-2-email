@@ -5,10 +5,12 @@
   "main": "app.js",
   "dependencies": {
     "dateformat": "^1.0.12",
-    "nconf": "^0.8.4",
     "fstream": "^1.0.10",
+    "nconf": "^0.8.4",
     "nodemailer": "^2.5.0",
-    "tar": "^2.2.1"
+    "readdirp": "^2.1.0",
+    "tar": "^2.2.1",
+    "winston": "^2.3.1"
   },
   "devDependencies": {},
   "scripts": {
