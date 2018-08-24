@@ -8,7 +8,7 @@ var config = require('./config');
 var logger = require('winston');
 var path = require('path');
 
-var dateFun = () => dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
+var dateFun = () => dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
 
 var logInfo = str => logger.info('[' + dateFun() + '] ' + str);
 var logError = str => logger.error('[' + dateFun() + '] ' + str);
@@ -25,14 +25,22 @@ var mailOptions = {
     text: 'Test', // plaintext body,
 };
 
+function contains(str, substr) {
+	return str.indexOf(substr) !== -1;
+}
+
 // send mail with defined transport object
 function makeBackup(){
 	logInfo('Backup started');
 	var date = dateFun();
 	var stream = fstream.Reader({ 'path': config.get('folderPath'), 'type': 'Directory' , filter: function () {
-		if(this.basename === 'nims-base2.json' || this.basename === 'nims-base3.json' || this.basename === 'nims.log'){
+		if(contains(this.basename,'nims-base2.json') || 
+		  contains(this.basename,'nims-base3.json') ||
+		  contains(this.basename,'_output.log')){
+			logInfo('skip file ' + this.basename);
 			return false;
 		}
+		logInfo('proceed file ' + this.basename);
 		return true;
 	}});
 	stream.on('error', function(e){
@@ -52,6 +60,8 @@ function makeBackup(){
         }
         logInfo('Message sent: ' + info.response);
 		logInfo('Backup finished successfully');
+		//logger.flush();
+		process.stdout.write('');
     });
 };
 
